@@ -36,7 +36,7 @@ $states = json_decode($data);
 $this->render('index', ['svgData' => $states]);
 ```
 ### В шаблоне создаем js-обрыботчики событий
-```javascript
+```php
 <?php
 $this->registerJs(new yii\web\JsExpression("
     var customClick = function (path) {
@@ -78,7 +78,7 @@ $this->registerJs(new yii\web\JsExpression("
     //...
     // Html опции контейнера svg_map
     'containerOptions' => [
-        'class' => 'svg_map',                    
+        'class' => 'svg_map',
     ],
     // Html опции для контейнера toolTip
     'toolTipContainerOptions' => [
