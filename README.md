@@ -29,15 +29,21 @@ use ghopper\svgmap\SvgMapWidget;
 
 ### В контроллере получаем данные для построения svg (в данном случае из примера) и передаем в шаблон
 ```php
-$states = include Yii::getAlias('@ghopper/svgmap/example') . "/russia.php";
+$file = Yii::getAlias('@ghopper/svgmap/example') . "/russia.json";
+$data = file_get_contents($file);
+$states = json_decode($data);
 ...
 $this->render('index', ['svgData' => $states]);
 ```
-### В шаблоне создаем js-обрыботчики событий в глобальной зоне видимости
+### В шаблоне создаем js-обрыботчики событий
 ```javascript
-<script>
-    var customClick = function(path) {alert(path.attr('id') + ' - ' + path.attr('title'))};
-</script>
+<?php
+$this->registerJs(new yii\web\JsExpression("
+    var customClick = function (path) {
+        alert(path.attr('id') + ' - ' + path.attr('title'))
+    };
+"), \yii\web\View::POS_READY);
+?>
 ```
 ### И там же передаем все данные виджету
 ```php
@@ -67,12 +73,27 @@ $this->render('index', ['svgData' => $states]);
  * SvgMapWidget::DATA_SOURCE_JSON_URL - ссылка на json
 
 ## Внешний вид
-Дефолтные стили заложены `@vendor/ghopper/svg-map/src/css/svg-map.css`, которые вы можете как угодно переопределять в своем коде. Сам виджет имеет простую структуру
 ```
-<div class='svg_map'>
-    <div><!--tooltip--></div>
-    <svg />
-</div>
+<?= SvgMapWidget::widget([
+    //...
+    // Html опции контейнера svg_map
+    'containerOptions' => [
+        'class' => 'svg_map',                    
+    ],
+    // Html опции для контейнера toolTip
+    'toolTipContainerOptions' => [
+        'class' => 'tooltip',
+    ],
+    // Опции для toolTip, коррекция позиционирования
+    'toolTipOptions' => [
+        'position' => [
+            'x' => 80,
+            'y' => 120,
+        ]
+    ],
+    // Html заголовки и опции для тега svg
+    'svgContainerOptions' => [],
+]); ?>
 ```
 Можете создавать сложную анимацию в обработчиках событий.
 
