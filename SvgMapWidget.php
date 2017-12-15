@@ -117,7 +117,7 @@ class SvgMapWidget extends Widget
     {
         $this->registerAssets();
         echo Html::beginTag('div', $this->containerOptions) . PHP_EOL;
-        echo $this->render('_zoom2', ['id' => $this->toolsId]) . PHP_EOL;
+        echo $this->render('_zoom', ['id' => $this->toolsId]) . PHP_EOL;
         echo Html::tag('div', '', $this->toolTipContainerOptions) . PHP_EOL;
         echo Html::tag('svg', '', $this->svgContainerOptions) . PHP_EOL;
         echo Html::endTag('div') . PHP_EOL;
