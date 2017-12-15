@@ -89,7 +89,7 @@ class SvgMapWidget extends Widget
         // Html опции для контейнера toolTip
         $this->toolTipContainerOptions = ArrayHelper::merge([
             'id' => $tooltipId,
-            'class' => 'svg_map_tooltip',
+            'class' => 'tooltip',
         ], $this->toolTipContainerOptions);
         $this->toolTipContainerOptions['id'] = $this->toolTipContainerOptions['id'] ?: $tooltipId;
 
