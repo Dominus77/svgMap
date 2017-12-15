@@ -104,7 +104,8 @@ var SvgMap = function (options) {
         var left = pos.left - toolTipOptions.position.x;
         var top = pos.top - toolTipOptions.position.y;
 
-        toolTip.css({display: 'block', left: left + 'px', top: top + 'px'});
+        root.toolTip.style.left = left + 'px';
+        root.toolTip.style.top = top + 'px';
     };
 
     var mouseOver = function (e) {
